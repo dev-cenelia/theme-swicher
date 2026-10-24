@@ -1,14 +1,9 @@
-﻿import { useEffect, useState } from "react";
 import "./App.css";
+import { useThemeStore } from "./store/useThemeStore";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-  const themeToggle = () => setDarkMode((prev) => !prev);
-  useEffect(() => {
-    localStorage.setItem("darkMode", String(darkMode));
-  }, [darkMode]);
+  const darkMode = useThemeStore((state) => state.darkMode);
+  const themeToggle = useThemeStore((state) => state.themeToggle);
 
   return (
     <div className="theme-demo" data-theme={darkMode ? "dark" : "light"}>
